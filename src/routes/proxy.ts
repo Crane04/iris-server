@@ -12,9 +12,8 @@ router.use(requireAuth);
 // This keeps the Rust service fully internal — it never receives unauthenticated
 // traffic from the public internet.
 async function forwardToRust(req: Request, res: Response): Promise<void> {
-  const url = `${config.rustBackendUrl}${req.path}`;
+  const url = `${config.rustBackendUrl}/v1${req.path}`;
 
-  console.log(`Proxying request to Rust backend: ${req.method} ${url}`);
 
   try {
     const response = await axios({
